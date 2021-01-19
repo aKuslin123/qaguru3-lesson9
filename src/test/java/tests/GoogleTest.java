@@ -53,14 +53,14 @@ public class GoogleTest {
     }
 
     @Test
-    @DisplayName("Successful google test")
+    @DisplayName("Successful yandex test")
     void successfulSearchTest() {
-        step("Открываем google.com", () -> {
-            open("https://google.com");
+        step("Открываем yandex.ru", () -> {
+            open("https://yandex.ru/");
         });
 
         step("Вводим Selenide в поиск", () -> {
-            $(byName("q")).setValue("Selenide").pressEnter();
+            $(byName("text")).setValue("Selenide").pressEnter();
         });
 
         step("Проверяем что Selenide появился в рез. поиска", () -> {
@@ -69,14 +69,14 @@ public class GoogleTest {
     }
 
     @Test
-    @DisplayName("Unsuccessful google test")
+    @DisplayName("Unsuccessful yandex test")
     void unsuccessfulSearchTest() {
-        step("Открываем google.com", () -> {
-            open("https://google.com");
+        step("Открываем yandex.ru", () -> {
+            open("https://yandex.ru/");
         });
 
         step("Вводим Selenide в поиск", () -> {
-            $(byName("q")).setValue("Selenide").pressEnter();
+            $(byName("text")).setValue("Selenide").pressEnter();
         });
 
         step("Проверяем что Selenide появился в рез. поиска", () -> {
