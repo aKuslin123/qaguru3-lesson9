@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Browsers.FIREFOX;
 import static com.codeborne.selenide.Browsers.OPERA;
@@ -30,8 +31,14 @@ public class GoogleTest {
     @BeforeAll
     static void setup() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+
+        Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud:4444/wd/hub/";
+        Configuration.remote = "https://user1:1234@" + System.getProperty("remote.browser.url") + ":4444/wd/hub/";
     }
 
     @AfterEach
@@ -40,6 +47,7 @@ public class GoogleTest {
         attachScreenshot("Last screenshot");
         attachPageSource();
         attachAsText("Browser console logs", getConsoleLogs());
+        attachVideo();
 
         closeWebDriver();
     }
